@@ -1,14 +1,40 @@
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-const inquirer = require("inquirer");
-const path = require("path");
+const uinput = require("./lib/processUserInput");
+const genHTML = require("./lib/generateHTML");
 const fs = require("fs");
 
-const OUTPUT_DIR = path.resolve(__dirname, "output");
-const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-const render = require("./lib/htmlRenderer");
+async function init() {
+  input = new uinput.UserInput();
+  await input.requestInput();
+
+  let team = [];
+  for (record of input.allAnswers) {
+    let employee = {};
+    if (record.type === 'Manager') {
+      employee = new Manager(record.name, record.id, record.email, record.addParam);
+    }
+    if (record.type === 'Engineer') {
+      employee = new Engineer(record.name, record.id, record.email, record.addParam);
+    }
+    if (record.type === 'Intern') {
+      employee = new Intern(record.name, record.id, record.email, record.addParam);
+    }
+    team.push(employee);
+  }
+  let teamPage = new genHTML.TeamPage(team);
+  let html = teamPage.generate();
+
+  fs.writeFile("./output/MyTeam.html", html, (err) => {
+    if (err) throw err;
+    else console.log("HTML file generated successfully");
+  });
+
+}
+
+init();
 
 
 // Write code to use inquirer to gather information about the development team members,

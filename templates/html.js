@@ -1,4 +1,5 @@
-
+function html(cards) {
+    return `
     <!DOCTYPE html>
     <html>
         <head>
@@ -20,17 +21,11 @@
                 </nav>
             </header>
             <main class="d-flex justify-content-around flex-wrap p-4">
-                
-<div class="card m-3">
-    <h4 class="card-header">Michael Scott</h4>
-    <h5 class="card-header"><i class="fas fa-user-tie"></i> Manager</h5>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">ID: 0123</li>
-        <li class="list-group-item">Email: michael.scott@dundermifflin.com</li>
-        <li class="list-group-item">Office Number: 200</li>
-    </ul>
-</div>
-
+                ${cards}
             </main>
         </body>
     </html>
+`
+}
+
+module.exports.html = html;
