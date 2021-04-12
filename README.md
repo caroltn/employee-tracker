@@ -14,7 +14,9 @@ Run `npm install` to install all dependencies
 ## Usage
 ---
 Run `node apps.js` to start the application
+
 ![](node.gif)
 
 Go to the `output` folder, find `team.html` and open it in your default web browser. This is your output web page for your team. It should look similar to below.
+
 ![](html.JPG)
